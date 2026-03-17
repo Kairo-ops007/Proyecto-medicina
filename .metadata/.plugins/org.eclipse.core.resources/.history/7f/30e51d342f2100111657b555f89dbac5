@@ -1,0 +1,18 @@
+package medicina;
+
+import java.awt.Color;
+
+import utils.ventanas.ventanaBitmap.VentanaGrafica;
+
+public class Main {
+	public static void main(String[] args) {
+		System.out.println("----------------DATOS DE PRUEBA------------------");
+		VentanaGrafica v1 = new VentanaGrafica(1250, 1000, "Principal",Color Color.GREEN);
+		
+		
+		
+		
+		System.out.println();
+
+	}
+}

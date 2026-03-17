@@ -1,0 +1,254 @@
+package medicina;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class FuncionesAux {
+
+	//Ordenamiento burbuja theta(n**2)
+	
+	/**
+	 * Ordena la lista de Pacientes
+	 * @param array
+	 */
+	public static void ordenamientoPacientesEdad(ArrayList<Paciente> array) {
+
+		int n = array.size();
+		for (int i=0 ; i< n-1; i++ ) {
+			for (int j = i+1; j<n; j++ ) {
+				if (array.get(i).getEdad() > array.get(j).getEdad()) {
+					Paciente temp = array.get(i);
+					array.set(i, array.get(j));
+					array.set(j, temp);
+				}
+			}
+		}
+	}
+	
+	//TODO revisar lo de urgencia
+//	public static ArrayList<Paciente> ordenamientoPacientesNivel(ArrayList<Paciente> array){
+//		
+//		ArrayList<Paciente> leves = new ArrayList<Paciente>();
+//		ArrayList<Paciente> normales = new ArrayList<Paciente>();
+//		ArrayList<Paciente> graves = new ArrayList<Paciente>();
+//		ArrayList<Paciente> urgentes = new ArrayList<Paciente>();
+//		ArrayList<Paciente> resultado = new ArrayList<Paciente>();
+//		
+//		for (Paciente p: array) {
+//			for( Cita c : p.getCitas()) {
+//				
+//			}
+//		}
+//		
+//	}
+
+
+	/**
+	 * Muestra el medico mas antiguo
+	 * @param meds
+	 * Se da por hecho que se ha hecho el ordenamiento antes
+	 */
+	public static void mostrarMedicoMayor(ArrayList<Medico> meds) {
+		System.out.println("El medico mas adulto es "+ meds.get(meds.size()-1));
+	}
+
+
+	/**
+	 * Ordena la lista de medicos
+	 * @param array
+	 */
+	public static void ordenamientoMedicos(ArrayList<Medico> array) {
+
+		int n = array.size();
+		for (int i=0 ; i< n-1; i++ ) {
+			for (int j = i+1; j<n; j++ ) {
+				if (array.get(i).getAñosExp() > array.get(j).getAñosExp()) {
+					Medico temp = array.get(i);
+					array.set(i, array.get(j));
+					array.set(j, temp);
+				}
+			}
+		}
+	}
+
+
+	/**
+	 * Comprueba el DNI del usuario tanto paciente como medico
+	 * @param Dni
+	 * @return
+	 */
+	public static boolean comprobacionDNI(String Dni) {
+		
+		String dni = Dni.toUpperCase();
+		
+		String posible = dni.substring(0,8);
+		
+		char letra_pos = dni.charAt(8);
+		
+		int op1 = Integer.parseInt(posible);
+		
+		String lista_text = "TRWAGMYFPDXBNJZSQVHLCKE";
+		
+		int resto = op1 % 23;
+		
+		char l_calculada = lista_text.charAt(resto);
+		
+		return l_calculada == letra_pos;
+
+
+	}
+
+	// Para el calculo para saber el medico mas cercano
+	
+	/**
+	 * Calcula la distancia entre 2 personas
+	 * @param a
+	 * @param b
+	 * @return
+	 */
+	public static double distancia(Personas a, Personas b) {
+		double dx = a.getX() - b.getX();
+		double dy = a.getY() - b.getY();
+		return Math.sqrt(dx*dx + dy*dy); // NO se puede hacer **2 
+	}
+
+
+	/**
+	 * Calcular cual es el medico mas cercano a un paciente
+	 * @param meds
+	 * @param p
+	 * @return
+	 */
+	public static Medico medicoMasCercano (ArrayList<Medico> meds, Paciente p) {
+
+		Medico cercano = null;
+		double menor = 999999999999.0;
+
+		for (int i= 0; i < meds.size(); i++) {
+
+			Personas personaMed = (Personas) meds.get(i);
+			Personas personaPac = (Personas) p;
+			double dist = FuncionesAux.distancia(personaMed, personaPac);
+			if (dist< menor) {
+				menor  = dist;
+				cercano =meds.get(i);
+			}
+		}
+		System.out.println("La distancia mas cercana es "+ menor);
+		return cercano;
+	}
+
+
+
+
+
+
+	/**
+	 * Busca un paciente en un arrayList
+	 * @param array
+	 * @param p
+	 * @return
+	 */
+	public static int buscarPaciente (ArrayList<Paciente> array , Paciente p) {
+		if (p != null && array != null) {
+			for (int i = 0; i <array.size(); i++ ) {
+				if (array.get(i).getDni().equals(p.getDni())) {
+					return i;
+				}
+			}
+			return -1;
+		} else {
+			System.err.println("El array es Nulo o la Persona es nula");
+			return -1;
+		}
+	}
+
+	
+	/**
+	 * Busca un medico en un ArrayList
+	 * @param array
+	 * @param m
+	 * @return
+	 */
+	public static int buscarMedico (ArrayList<Medico> array , Medico m) {
+		if (m != null && array != null) {
+			for (int i = 0; i <array.size(); i++ ) {
+				if (array.get(i).getDni().equals(m.getDni())) {
+					return i;
+				}
+			}
+			return -1;
+		} else {
+			System.err.println("El array es Nulo o la Persona es nula");
+			return -1;
+		}
+	}
+
+	
+	public static int buscarHistoriales (ArrayList<String> array,  String s) {
+		if (s == null || s.length() == 0) {
+			System.err.println("ERROR: No se ha podido buscar "+ s);
+			return -1;
+		} else {
+			for (int i = 0; i <array.size(); i++) {
+				if (array.get(i).equals(s)) {
+					return i;
+				}
+			}
+			return -1;
+		}
+	}
+
+	public static int buscarCitas(ArrayList<Cita> array, Cita c) {
+
+		for (int i = 0; i < array.size(); i++) {
+			if (array.get(i).equals(c)) {
+				return i;
+			}
+		}
+
+		return -1;
+
+	}
+
+
+	/** En caso de ser nulo el año, mes o dia:
+	 *  En ese caso de devolvera LocalDate.EPOCH para ponerlo en constante para el control de errores
+	 * @param año
+	 * @param mes
+	 * @param dia
+	 * @return
+	 */
+	public static LocalDate conversionFecha(String año, String mes, String dia) {
+
+		if (año == null ) {
+			System.err.println("ERROR: El año no puede ser nulo");
+			return LocalDate.EPOCH; 
+		}
+		if (mes == null) {
+			System.err.println("ERROR: El mes no puede ser nulo");
+			return LocalDate.EPOCH ; 
+		}
+		if (dia == null) {
+			System.err.println("ERROR: El dia no puede ser nulo");
+			return LocalDate.EPOCH ;
+		}
+		String texto = año +"-"+mes+"-"+dia;
+
+		return LocalDate.parse(texto);
+	}
+
+	public static boolean menorDato(int a, int b) {
+		return a<b;
+	}
+	
+	
+	public static String ayudaSetter(String valor, String nombre) {
+		if (valor == null || valor.isEmpty()) {
+			System.err.println("ERROR: "+ nombre + " no puede estar vacio.");
+			return "Desconocido";
+		}
+		return valor; 
+	}
+
+}

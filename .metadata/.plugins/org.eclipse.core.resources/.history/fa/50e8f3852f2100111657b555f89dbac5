@@ -1,0 +1,16 @@
+package medicina;
+
+import utils.ventanas.ventanaBitmap.VentanaGrafica;
+
+public class Main {
+	public static void main(String[] args) {
+		System.out.println("----------------DATOS DE PRUEBA------------------");
+		VentanaGrafica v1 = new VentanaGrafica(1250, 1000, "Principal");
+		
+		
+		
+		
+		System.out.println();
+
+	}
+}

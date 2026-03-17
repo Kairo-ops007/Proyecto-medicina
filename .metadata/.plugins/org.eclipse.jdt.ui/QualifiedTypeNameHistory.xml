@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="java.lang.reflect.Array"/>
+    <fullyQualifiedTypeName name="medicina.Funciones_aux"/>
+    <fullyQualifiedTypeName name="medicina.Cita"/>
+    <fullyQualifiedTypeName name="utils.ventanas.ventanaBitmap.VentanaGrafica"/>
+    <fullyQualifiedTypeName name="java.awt.event.ComponentListener"/>
+    <fullyQualifiedTypeName name="java.awt.Color"/>
+    <fullyQualifiedTypeName name="medicina.Medico"/>
+    <fullyQualifiedTypeName name="medicina.Personas"/>
+    <fullyQualifiedTypeName name="java.time.LocalTime"/>
+    <fullyQualifiedTypeName name="medicina.Tipo_medico"/>
+    <fullyQualifiedTypeName name="jdk.internal.org.jline.terminal.impl.Diag"/>
+    <fullyQualifiedTypeName name="medicina.Paciente"/>
+    <fullyQualifiedTypeName name="medicina.Control"/>
+    <fullyQualifiedTypeName name="java.lang.FunctionalInterface"/>
+    <fullyQualifiedTypeName name="medicina.FuncionesAux"/>
+    <fullyQualifiedTypeName name="medicina.Historial"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.lang.module.ModuleDescriptor.Requires"/>
+    <fullyQualifiedTypeName name="medicina.NivelImportancia"/>
+</qualifiedTypeNameHistroy>

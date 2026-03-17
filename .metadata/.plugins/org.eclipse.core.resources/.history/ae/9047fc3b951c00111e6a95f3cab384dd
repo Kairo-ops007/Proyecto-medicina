@@ -1,0 +1,64 @@
+package medicina;
+
+public class Main {
+	public static void main(String[] args) {
+		System.out.println("----------------DATOS DE PRUEBA------------------");
+		
+		Personas per1 = new Personas("Ana", "Gomez", "Ruiz", 10, 20, "Calle Mayor 1", "71234567B", 45, "Femenino");
+		Personas per2 = new Personas("David", "Sanz", "Vega", -5, 12, "Plaza España 3", "87654321X", 28, "Masculino");
+		
+		Paciente pac1 = new Paciente("Luis", "Perez", "Alonso", 15, 25, "Av. Libertad 5", "45678901H", 30, "Masculino", 1.80, 80.5);
+		Paciente pac2 = new Paciente("Marta", "Lopez", "Diaz", 5, 50, "Calle Olmos 12", "11223344F", 65, "Femenino", 1.65, 62.0);
+		Paciente pac3 = new Paciente("Iker", "Muniain", "Goñi", 100, 200, "San Mames Berria", "99887766W", 15, "Masculino", 1.70, 71.2);
+		
+		ArrayList<Tipo_medico> espMed1 = new ArrayList<>(Arrays.asList(Tipo_medico.CIRUJANO_PLASTICO, Tipo_medico.DERMATOLOGO));
+		Medico med1 = new Medico("Carlos", "Martin", "Sanz", 0, 0, "Hospital Central", "44556677T", 50, "Masculino", espMed1, 20);
+		
+		ArrayList<Tipo_medico> espMed2 = new ArrayList<>(Arrays.asList(Tipo_medico.PEDIATRA, Tipo_medico.FAMILIAR));
+		Medico med2 = new Medico("Laura", "Fernandez", "Gabilondo", 2, 8, "Clinica Norte", "12345678Z", 38, "Femenino", espMed2, 10);
+	
+		// ---------------- CONTROL (Clínica) ----------------
+		System.out.println("========== REGISTRANDO EN CLÍNICA ==========");
+		Control clinica = new Control();
+		clinica.registrarPaciente(pac1);
+		clinica.registrarPaciente(pac2);
+		clinica.registrarPaciente(pac3);
+		
+		clinica.registrarMedico(med1);
+		clinica.registrarMedico(med2);
+		
+		// ---------------- CITAS ----------------
+		System.out.println("\n========== CREANDO CITAS ==========");
+		Cita cita1 = new Cita(pac1, med1, LocalDate.of(2026, 4, 15), LocalTime.of(10, 30), "Revisión cirugía", false);
+		Cita cita2 = new Cita(pac2, med2, LocalDate.of(2022, 1, 10), LocalTime.of(12, 00), "Dolor de garganta", true);
+		
+		System.out.println("¿La cita 2 (año 2022) está vencida? -> " + cita2.estaVencida());
+
+		// ---------------- HISTORIAL MÉDICO ----------------
+		System.out.println("\n========== CREANDO HISTORIALES ==========");
+		ArrayList<String> enfPac1 = new ArrayList<>(Arrays.asList("Asma"));
+		ArrayList<String> medPac1 = new ArrayList<>(Arrays.asList("Ventolin"));
+		ArrayList<Cita> citasPac1 = new ArrayList<>(Arrays.asList(cita1));
+		ArrayList<String> alerPac1 = new ArrayList<>(Arrays.asList("Polen", "Ácaros"));
+
+		Historial histPac1 = new Historial(pac1, enfPac1, medPac1, citasPac1, alerPac1, LocalDate.of(2020, 5, 1), LocalDate.now());
+		
+		// Probando métodos del historial
+		histPac1.agregarEnfermedad("Hipertensión leve");
+		histPac1.agregarMedicamentos("Ibuprofeno");
+		histPac1.mostrarResumen();
+
+		// ---------------- MOSTRAR DATOS (Control) ----------------
+		clinica.mostrarPacientes(); // Deberían salir ordenados por edad por tu método de burbuja
+		clinica.mostrarMedicos();
+
+		// ---------------- FUNCIONES AUXILIARES ----------------
+		System.out.println("========== PROBANDO FUNCIONES AUXILIARES ==========");
+		System.out.println("Distancia entre el paciente Luis y el médico Carlos: " + Funciones_aux.distancia(pac1, med1));
+		System.out.println("¿Luis es menor de edad? " + pac1.esMenor());
+		System.out.println("¿Iker es menor de edad? " + pac3.esMenor());
+	}
+		
+	}
+	
+}

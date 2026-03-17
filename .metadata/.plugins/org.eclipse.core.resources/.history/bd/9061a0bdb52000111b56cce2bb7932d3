@@ -1,0 +1,18 @@
+package medicina;
+
+public class Urgencia extends Cita {
+	private int nivelGravedad;
+	private boolean ingesoNecesario;
+	
+	public Urgencia(Paciente p, Medico m , String motivo, NivelImportancia nivel) {
+		
+		this.nivelGravedad = nivel;
+		this.ingesoNecesario = ()
+		
+	}
+	
+	
+	private boolean importancia () {
+		return (this.nivelGravedad == NivelImportancia.URGENTE || this.nivelGravedad == NivelImportancia.GRAVE);
+	}
+}

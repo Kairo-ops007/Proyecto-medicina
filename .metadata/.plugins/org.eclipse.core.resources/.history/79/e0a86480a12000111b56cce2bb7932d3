@@ -1,0 +1,481 @@
+package medicina;
+//ventanaConsolaConBotones
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+
+
+public class Control {
+
+	private ArrayList<Paciente> listaPacientes;
+	private ArrayList<Medico> listaMedicos;
+
+
+
+	/**
+	 * No se le pasan argumentos porque construye los arrays de Pacientes y Medicos
+	 */
+	public Control() {
+
+		this.listaPacientes = new ArrayList<Paciente>();
+		this.listaMedicos = new ArrayList<Medico>();
+	}
+
+	/**
+	 * Asigna una cita al paciente y al medico con un motivo
+	 * @param p
+	 * @param m
+	 * @param motivo
+	 */
+	public void agendar(Paciente p , Medico m, String motivo) {
+
+		Cita cita = new Cita (p, m, LocalDate.now(), LocalTime.NOON, motivo, false );
+		p.getCitas().add(cita);
+
+	}
+
+	/**
+	 * Cancela la cita para un paciente y un medico
+	 * @param p
+	 * @param c
+	 */
+	public void cancelarCita(Paciente p, Cita c) {
+
+		int indice = FuncionesAux.buscarCitas(p.getCitas(), c);
+		if (indice != -1) {
+			p.getCitas().remove(indice);
+		} else {
+			System.err.println("ERROR: No se ha encontrado la cita");
+		}
+	}
+	/**
+	 * Muestra las citas del paciente pedido
+	 * @param p
+	 */
+	public void mostrarCitasPaciente(Paciente p) {
+
+		for (Cita c : p.getCitas()) {
+			System.out.println(c);
+		}
+
+	}
+
+	public void mostrarCitasMedico(Medico m) {
+		int cont = 0;
+		for (Paciente p : getListaPacientes()) {
+			for (Cita c : p.getCitas()) {
+				if (c.getMedico().equals(m)) {
+					System.out.println(c);
+					cont ++;
+				}
+			}
+		}
+		if (cont == 0) {
+			System.out.println("El medico "+m.getNombre() +"no tiene ninguna cita asignada");
+		}
+	}
+
+
+	public ArrayList<Paciente> getListaPacientes() {
+		return listaPacientes;
+	}
+
+
+
+	public void setListaPacientes(ArrayList<Paciente> listaPacientes) {
+		this.listaPacientes = listaPacientes;
+	}
+
+
+
+	public ArrayList<Medico> getListaMedicos() {
+		return listaMedicos;
+	}
+
+
+
+	public void setListaMedicos(ArrayList<Medico> listaMedicos) {
+		this.listaMedicos = listaMedicos;
+	}
+
+
+
+	public boolean pacienteYaRegistrado(Paciente p) {
+		return FuncionesAux.buscarPaciente(listaPacientes, p) != -1;
+	}
+
+
+	//Doy por hecho que es un paciente real
+	/**
+	 * El paciente hay que pasarlo sin ser null
+	 * @param Paciente 
+	 */
+	public void registrarPaciente(Paciente p) {
+		if (p == null) {
+			System.err.println("ERROR: El paciente es nulo");
+			return;
+		}
+		if (pacienteYaRegistrado(p)) {
+			System.err.println("Ese paciente ya esta registrado");
+			return;
+		}
+		this.listaPacientes.add(p);
+		System.out.println(p.getNombre()+" ha sido registrado satisfactoriamente.");
+		FuncionesAux.ordenamientoPacientes(listaPacientes);
+
+	}
+
+	/**
+	 * Elimina al paciente
+	 * @param Paciente
+	 */
+	public void quitarPacientes(Paciente p) {
+		int indice = FuncionesAux.buscarPaciente(getListaPacientes(), p);
+		if (indice != -1) {
+			this.listaPacientes.remove(indice);
+			System.out.println("El Paciente "+p.getNombre()+" ha sido eliminado con exito");
+		} else {
+			System.err.println("No se ha encontrado el paciente.");
+		}
+		FuncionesAux.ordenamientoPacientes(listaPacientes);
+	}
+
+	public boolean medicoYaRegistrado(Medico m) {
+		return FuncionesAux.buscarMedico(listaMedicos, m) != -1;
+	}
+
+	/**
+	 * registra el medico
+	 * @param medico m
+	 */
+	public void registrarMedico(Medico m) {
+		if (m == null) {
+			System.err.println("ERROR: El medico es nulo");
+			return; 
+		}
+		if (medicoYaRegistrado(m)) {
+			System.err.println("ERROR: El medico "+m.getNombre()+" ya ha sido registrado");
+			return ;
+		}
+		this.listaMedicos.add(m);
+		System.out.println(m.getNombre() +" ha sido registrado con el numero "+ m.getNumeroMedico());
+		FuncionesAux.ordenamientoMedicos(listaMedicos);
+	}
+
+	/**
+	 * Elimina el medico de la lista
+	 * @param medico m
+	 */
+	public void quitarMedicos(Medico m) {
+		if (m!= null) {
+			int indice = FuncionesAux.buscarMedico(getListaMedicos(), m);
+			if (indice != -1) {
+				this.listaMedicos.remove(indice);
+			} else {
+				System.err.println("No se ha podido eliminar de la lista a "+ m.getNombre());
+			}
+		}else {
+			System.err.println("El elemento es nulo");
+		}
+		FuncionesAux.ordenamientoMedicos(listaMedicos);
+	}
+
+
+
+	/**
+	 * Muestra los pacientes NO argumentos
+	 */
+	public void mostrarPacientes() {
+		System.out.println("\n-----------Pacientes-----------\n");
+		for (Paciente p : this.listaPacientes) {
+			System.out.println(p);
+		}
+
+	}
+
+	/**
+	 * Muestra los medicos NO argumentos
+	 */
+	public void mostrarMedicos() {
+		System.out.println("\n-----------Medicos-----------\n");
+		for (Medico m : this.listaMedicos) {
+			System.out.println(m);
+		}
+	}
+	/**
+	 * Muestra todas las personas registradas
+	 * NO argumentos
+	 */
+	public void mostrarPersonasAsociadas() {
+		System.out.println("\n-----------Personas Totales asociadas-----------\n");
+		System.out.println("Los pacientes:\n");
+		mostrarPacientes();
+		System.out.println("\nLos medicos\n");
+		mostrarMedicos();
+	}
+
+
+	/**
+	 * Devuelve una lista de medicos con la especialidad pedida
+	 * @param tm -> el tipo de especialidad
+	 * @return
+	 */
+	public ArrayList<Medico> medicosEspecialistasEn(Tipo_medico tm){
+		ArrayList<Medico> listaMedicos = new ArrayList<Medico>();
+
+		for (Medico m : getListaMedicos()) {
+			for (Tipo_medico tipo : m.getEspecialidades()) {
+				if (tm != null && tipo!= null &&tm.equals(tipo)) {
+					listaMedicos.add(m);
+				}
+			}
+		}
+		return listaMedicos;
+	}
+
+	/**
+	 * 
+	 * @return Una lista con pacientes obesos
+	 */
+	public ArrayList<Paciente> buscarPacientesObesos(){
+		ArrayList<Paciente> listaPacientes = new ArrayList<Paciente>();
+
+		for (Paciente p : getListaPacientes()) {
+			if (p.imc()> 30) {
+				listaPacientes.add(p);
+			}
+		}
+
+		return listaPacientes;
+	}
+
+	/**
+	 * @return devuelve un ArrayList con los pacientes con peso por debajo de lo normal
+	 */
+	public ArrayList<Paciente> buscarPacientesBajoPeso(){
+		ArrayList<Paciente> listaPacientes = new ArrayList<Paciente>();
+
+		for (Paciente p: getListaPacientes()) {
+			if (p.imc() < 18.5) {
+				listaPacientes.add(p);
+			}
+		}
+
+		return listaPacientes;
+	}
+	/**
+	 * Da la cita por atendida añadiendo el diagnostico a la parte de enfermedades y el medicamento a la lista de medicamentos
+	 * @param Cita c
+	 * @param String Diagnostico
+	 * @param String medicamento
+	 */
+	public void atenderCita(Cita c, String Diagnostico, String medicamento) {
+
+		if (c == null) {
+			System.err.println("ERROR: La cita no puede ser nula");
+			return;
+		}
+
+		if (c.isAtendida()) {
+			System.err.println("ERROR: La cita ya ha sido atendida");
+			return; 
+		}
+
+		c.setAtendida(true);
+
+
+
+
+		if (Diagnostico != null && !Diagnostico.isEmpty() ) {
+
+			if (medicamento != null && !medicamento.isEmpty()  ) {
+
+				Paciente p = c.getPaciente();
+				p.getHistorial().agregarEnfermedad(Diagnostico);
+				p.getHistorial().agregarMedicamentos(medicamento);
+
+			} else {
+
+				System.err.println("ERROR: El medicamento no puede ser nulo");
+			}
+
+		} else {
+
+			System.err.println("ERROR: El diagnostico no puede ser nulo");
+		}
+
+	}
+
+	//TODO arreglarlo
+	//============================================================================================================================================================================
+	public void reprogramarCita(Cita c) {
+		
+		
+		
+	}
+	
+	//============================================================================================================================================================================
+	
+	
+	
+	/**
+	 * Calcula cual es el porcentaje de menores en una lista de pacientes 
+	 * @param ArrayList <Pacientes> pacs
+	 */
+	public void porcentajeMenores(ArrayList<Paciente> pacs) {
+		
+		if (pacs.size() == 0) {
+			System.err.println("ADVERTENCIA: La lista de pacientes está vacía");
+			return; 
+		}
+		
+		int cont = 0;
+		for (Paciente p : pacs) {
+			if (p != null) {
+				if (p.esMenor()) {
+					cont ++;
+				}
+			}else {
+				System.err.println("ERROR: El paciente no pude ser nulo");
+			}
+		}
+		//TODO revisar el (double)
+		double calculo = (double) cont/pacs.size() *100;
+		System.out.println("El porcentaje de menores entre los pacientes es: "+ calculo);
+		
+	}
+	
+	
+	/**
+	 * Calcula cual es el medico que mas citas tiene asignadas
+	 * @return
+	 */
+	public Medico medicoMasCitas () {
+		ArrayList<Medico> meds = getListaMedicos();
+		ArrayList<Paciente> pacs = getListaPacientes();
+		if (meds.size()== 0) {
+			System.err.println("ADVERTENCIA: La lista de medicos está vacía");
+			
+		}
+		if (pacs.size()== 0) {
+			System.err.println("ADVERTENCIA: La lista de pacientes está vacía");
+		}
+		
+		int cont = -1;
+		Medico m = null;
+
+		for (int i= 0; i < meds.size(); i++) {
+			int contadorPers = 0;
+			if (meds.get(i) != null) {
+				for (Paciente p : pacs) {
+					if (p!= null) {
+						for (Cita c: p.getCitas()) {
+							if (c!= null) {
+								if (c.getMedico().equals(meds.get(i))) {
+									contadorPers ++;
+								}
+							}
+						}
+					}
+
+				}
+
+			} else {
+				System.err.println("ERROR: Medico nulo en la posicion "+ i);
+			}
+			if (contadorPers > cont) {
+				cont = contadorPers;
+				m = meds.get(i);
+			}
+		}
+		return m;
+
+	}
+	/**
+	 * Calcula el medico que menos citas tiene asignadas
+	 * @return
+	 */
+	public Medico medicoMenosCitas() {
+		
+		ArrayList<Medico> meds = getListaMedicos();
+		ArrayList<Paciente> pacs = getListaPacientes();
+		
+		if (meds.size()== 0) {
+			System.err.println("ADVERTENCIA: La lista de medicos está vacía");
+			
+		}
+		if (pacs.size()== 0) {
+			System.err.println("ADVERTENCIA: La lista de pacientes está vacía");
+		}
+		
+		int cont = 99999;
+		Medico m = null;
+		
+		for (int i= 0; i < meds.size(); i++){
+			Medico medActual = meds.get(i);
+			int contadorPers = 0;
+			if (medActual != null) {
+
+				for ( int j = 0; j < pacs.size(); j++) {
+					Paciente pacActual = pacs.get(j);
+					if (pacActual != null) {
+						ArrayList<Cita> listaCitas = pacActual.getCitas();
+						if (listaCitas != null) {
+							for ( int z = 0; z < listaCitas.size(); z++) {
+								Cita citaActual = listaCitas.get(z);
+								if (citaActual != null) {
+									Medico medicoActual = citaActual.getMedico();				
+									if (medicoActual.equals(medActual)) {
+										contadorPers ++;
+									 }else {
+									System.err.println("Error: la cita del paciente "+ pacActual.getNombre()+ " es vacía");
+								}
+							}
+						}
+					} else {
+						System.err.println("ERROR: La lista de citas es nula del paciente en la posicion "+ j);
+					}
+				} else {
+					System.err.println("ERROR: El paciente es nulo en la posicion "+ j);
+				}
+			}
+
+		} else {
+			System.err.println("ERROR: El medico es nulo en la posicion "+ i);
+		}
+			if (FuncionesAux.menorDato(cont, contadorPers)) {
+				cont = contadorPers;
+				m = medActual;
+				
+			}
+	}
+		return m;
+
+}
+
+	
+	
+
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if (obj == null || !(obj instanceof Control)) return false;
+		if (obj == this) return true;
+		Control otroControl = (Control) obj;
+		if (this.equals(otroControl)) return true;
+
+		return this.listaPacientes.equals(otroControl.getListaPacientes()) &&
+				this.listaMedicos.equals(otroControl.getListaMedicos()));
+	}
+
+	@Override
+	public String toString() {
+		return "Clinica con "+ listaPacientes.size()+ " pacientes"+
+				" y " +listaMedicos.size()+" medicos";
+	}
+
+
+
+
+}

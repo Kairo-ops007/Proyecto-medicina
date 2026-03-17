@@ -1,0 +1,116 @@
+package medicina;
+
+import java.time.LocalDate;
+
+public class Receta {
+	private Medico medico;
+	private Paciente paciente;
+	private String medicamento;
+	private String dosis;
+	private int duracionDias;
+	private LocalDate fechaEntrega;
+	private boolean recogida;
+	
+	
+	public Receta(Medico medico, Paciente paciente, String medicamento, String dosis, int duracionDias,
+			LocalDate fechaEntrega, boolean recogida) {
+
+		this.medico = medico;
+		this.paciente = paciente;
+		this.medicamento = medicamento;
+		this.dosis = dosis;
+		this.duracionDias = duracionDias;
+		this.fechaEntrega = fechaEntrega;
+		this.recogida = recogida;
+	}
+
+
+	public Medico getMedico() {
+		return medico;
+	}
+
+
+	public void setMedico(Medico medico) {
+		this.medico = medico;
+	}
+
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
+
+	public String getMedicamento() {
+		return medicamento;
+	}
+
+
+	public void setMedicamento(String medicamento) {
+		this.medicamento = medicamento;
+	}
+
+
+	public String getDosis() {
+		return dosis;
+	}
+
+
+	public void setDosis(String dosis) {
+		this.dosis = dosis;
+	}
+
+
+	public int getDuracionDias() {
+		return duracionDias;
+	}
+
+
+	public void setDuracionDias(int duracionDias) {
+		this.duracionDias = duracionDias;
+	}
+
+
+	public LocalDate getFechaEntrega() {
+		return fechaEntrega;
+	}
+
+
+	public void setFechaEntrega(LocalDate fechaEntrega) {
+		this.fechaEntrega = fechaEntrega;
+	}
+
+
+	public boolean isRecogida() {
+		return recogida;
+	}
+
+
+	public void setRecogida(boolean recogida) {
+		this.recogida = recogida;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
+
+
+	@Override
+	public String toString() {
+		
+		return "Medicamento: "+getMedicamento()+"\n"+
+		"Dosis: "+getDosis()+"\n"+
+				"Duracion(dias): "+getDuracionDias()+"\n"+
+		"Recogida: "+ (recogida ? "Si": "No")
+				;
+	}
+	
+	
+}

@@ -1,0 +1,133 @@
+package medicina;
+
+import java.util.ArrayList;
+
+public class Paciente extends Personas {
+	private double altura;
+	private double peso;
+
+	private ArrayList<Cita> citas;
+	private Historial historial;
+
+	public Paciente(String nombre, String apellido1, String apellido2, int x , int y,String domicilio,String dni,int edad,String genero,  
+			double altura, double peso) {
+		super(nombre, apellido1, apellido2, x, y, domicilio, dni, edad, genero);
+		setAltura(altura);
+		setPeso(peso);
+		this.historial = new Historial (this);
+		this.citas = new ArrayList<Cita>(); // NO haría falta el <cita> por el diamond condition
+	}
+	//TODO pensarlo mejor
+//	public Paciente () {
+//		this.nombre = "Desconocido";
+//		this.apellido1 = "Desconocido";
+//		this.apellido2 ="Desconocido";
+//		this.x = 0;
+//		this.y = 0;
+//		this.domicilio = "Desconocido";
+//		this.dni = "Desconocido";
+//		this.edad = 0;
+//		this.genero = "Desconocido";
+//		this.altura = 0;
+//		this.peso = 0;
+//	}
+//	
+
+	public ArrayList<Cita> getCitas() {
+		return citas;
+	}
+
+
+	public void setCitas(ArrayList<Cita> citas) {
+		this.citas = citas;
+	}
+
+
+	public Historial getHistorial() {
+		return historial;
+	}
+
+
+	public void setHistorial(Historial historial) {
+		this.historial = historial;
+	}
+
+
+	public double getAltura() {
+		return altura;
+	}
+
+
+	public void setAltura(double altura) {
+		if (altura < 0) {
+			System.err.println("Altura menor a 0 ????");
+			//Por si hay que hacer el IMC para que no divida con 0
+			this.altura = 0.1;
+		}else {
+			this.altura = altura;
+		}
+	}
+
+
+	public double getPeso() {
+		return peso;
+	}
+
+
+	public void setPeso(double peso) {
+		if (peso < 0 ) {
+			System.err.println("Peso menor a 0????????");
+			this.peso = 0;
+		} else {
+			this.peso = peso;
+		}
+	}
+
+
+	public String diagnosticoImc () {
+		double calculo = imc();
+		if (calculo < 18.5) {
+			return "El peso es inferior a lo normal";
+		} else if(18.5 <= calculo && calculo <25){
+			return "Normal";
+		} else if (25 <= calculo && calculo < 30) {
+			return ("Peso superior a lo normal");
+		} else {
+			return ("¡¡OBESIDAD!!");
+		}
+	}
+
+	public double imc() {
+		double calculo = (this.peso) / (this.altura*this.altura);
+		return calculo;
+	}
+
+
+	public boolean esMenor() {
+		return this.getEdad()< 18;
+	}
+
+	public boolean esMayor() {
+		return !esMenor();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		if (obj == null ||  !(obj instanceof Personas)) {
+			return false;
+		}
+		if (obj == this) return true;
+		Paciente otroPaciente = (Paciente) obj;
+		if (this.getDni().equals(otroPaciente.getDni())) return true;
+		return this.equals(otroPaciente);
+	}
+
+
+	@Override
+	public String toString() {
+		return super.toString()+"IMC: "+diagnosticoImc()+"\n"+ "Peso: "+peso+"\n"+"Altura: "+altura+"\n" ;
+	}
+
+
+}

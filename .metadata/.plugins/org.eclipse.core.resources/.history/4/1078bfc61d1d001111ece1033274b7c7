@@ -1,0 +1,92 @@
+package medicina;
+
+
+
+public class Paciente extends Personas {
+	private double altura;
+	private double peso;
+	
+
+	
+	public Paciente(String nombre, String apellido1, String apellido2, int x , int y,String domicilio,String dni,int edad,String genero,  double altura, double peso) {
+		super(nombre, apellido1, apellido2, x, y, domicilio, dni, edad, genero);
+		setAltura(altura);
+		setPeso(peso);
+		
+	}
+	
+	
+	public double getAltura() {
+		return altura;
+	}
+
+
+	public void setAltura(double altura) {
+		if (altura < 0) {
+			System.err.println("Altura menor a 0 ????");
+			//Por si hay que hacer el IMC para que no divida con 0
+			this.altura = 0.1;
+		}else {
+			this.altura = altura;
+		}
+	}
+
+
+	public double getPeso() {
+		return peso;
+	}
+
+
+	public void setPeso(double peso) {
+		if (peso < 0 ) {
+			System.err.println("Peso menor a 0????????");
+			this.peso = 0;
+		} else {
+			this.peso = peso;
+		}
+	}
+
+
+	public String diagnostico_imc () {
+		double calculo = imc();
+		if (calculo < 18.5) {
+			return "El peso es inferior a lo normal";
+		} else if(18.5 <= calculo && calculo <25){
+			return "Normal";
+		} else if (25 <= calculo && calculo < 30) {
+			return ("Peso superior a lo normal");
+		} else {
+			return ("¡¡OBESIDAD!!");
+		}
+	}
+	
+	public double imc() {
+		double calculo = (this.peso) / (this.altura*this.altura);
+		return calculo;
+	}
+
+	
+	public boolean esMenor() {
+		return (this.getEdad()< 18) ? true : false;
+	}
+	
+	public boolean esMayor() {
+		return !esMenor();
+	}
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return super.equals(obj);
+	}
+
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString()+"IMC: "+diagnostico_imc()+"\n"+ "Peso: "+peso+"\n"+"Altura: "+altura+"\n" ;
+	}
+	
+	
+}

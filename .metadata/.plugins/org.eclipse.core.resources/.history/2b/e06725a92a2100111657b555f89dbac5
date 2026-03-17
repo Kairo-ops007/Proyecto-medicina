@@ -1,0 +1,31 @@
+package medicina;
+
+import java.lang.module.ModuleDescriptor.Requires;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+public class Urgencia extends Cita {
+	private NivelImportancia nivelGravedad;
+	private boolean ingesoNecesario;
+	
+	public Urgencia(Paciente p, Medico m ,LocalDate fecha,LocalTime hora,  String motivo, boolean atendida, NivelImportancia nivel) {
+		//TODO super()
+		super(p, m, fecha, hora,motivo, atendida);
+		this.nivelGravedad = nivel;
+		this.ingesoNecesario = importancia();
+		
+	}
+	
+	
+	private boolean importancia () {
+		return (this.nivelGravedad == NivelImportancia.URGENTE || this.nivelGravedad == NivelImportancia.GRAVE);
+	}
+
+
+	@Override
+	public String toString() {
+		return super.toString()+
+				"URGENCIA - NIVEL:"+ nivelGravedad + "\n"+
+				"Requiere ingreso:"+ (importancia() ? "Si": "No");
+	}
+}

@@ -1,0 +1,129 @@
+package medicina;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+
+public class Historial {
+
+	private Paciente paciente;
+	private ArrayList<String> enfermedades;
+	private ArrayList<String> medicamentos;
+	private ArrayList<Cita> citas_anteriores;
+	private ArrayList<String> alergias;
+	private LocalDate fecha_inicial;
+	private LocalDate fecha_final;
+	
+	
+	
+	public Historial(Paciente paciente, ArrayList<String> enfermedades, ArrayList<String> medicamentos,
+			ArrayList<Cita> citas_anteriores, ArrayList<String> alergias, LocalDate fecha_inicial,
+			LocalDate fecha_final) {
+		super();
+		this.paciente = paciente;
+		this.enfermedades = enfermedades;
+		this.medicamentos = medicamentos;
+		this.citas_anteriores = citas_anteriores;
+		this.alergias = alergias;
+		this.fecha_inicial = fecha_inicial;
+		this.fecha_final = fecha_final;
+	}
+	
+	public void agregarCita(Cita c) {
+		this.citas_anteriores.add(c);
+	}
+	public LocalDate getFecha_inicial() {
+		return fecha_inicial;
+	}
+
+	public void setFecha_inicial(LocalDate fecha_inicial) {
+		this.fecha_inicial = fecha_inicial;
+		
+	}
+
+	public LocalDate getFecha_final() {
+		return fecha_final;
+	}
+	
+
+	public void setFecha_final(LocalDate fecha_final) {
+		this.fecha_final = fecha_final;
+	}
+
+	public void quitarCita(Cita c) {
+		int indice = Funciones_aux.buscarCitas(citas_anteriores, c);
+		if (indice != -1) {
+			this.citas_anteriores.remove(indice);
+			System.out.println("La cita ha sido eliminado");
+		} else {
+			 System.err.println("ERROR: No se ha encontrado la cita.");
+		}
+	}
+	
+	
+	//TODO quitar cita metodo 
+	
+	public void agregarEnfermedad(String enf) {
+		if (enf == null || enf.length() ==0) {
+			System.err.println("ERROR: No se ha podido agregar la enfermedad");
+		}else {
+			this.enfermedades.add(enf);
+			System.out.println("La ha enfermedad ha sido agregada");
+		}
+		
+	}
+
+	public void agregarAlergias(String alergia) {
+		
+		if (alergia == null || alergia.length() == 0) {
+			System.err.println("ERROR: No se ha podido agregar la alergia");
+		} else {
+			this.alergias.add(alergia);
+			System.out.println("La alergia ha sido agregada");
+		}
+		
+	} 
+	
+	public void agregarMedicamentos(String med) {
+		if (med == null || med.length() == 0) {
+			System.err.println("ERROR: No se ha podido guardar la medicacion.");
+		} else {
+			this.medicamentos.add(med);
+			System.out.println("La medicacion ha sido guardada");
+		}
+	}
+	
+	public void quitarMedicamentos(String med) {
+		int indice = Funciones_aux.buscar_historiales(medicamentos, med);
+		if (indice != -1) {
+			this.medicamentos.remove(indice);
+		} else {
+			System.err.println("ERROR: No esta ese medicamento en el paciente");
+		}
+	}
+	public void quitarEnfermedad(String enf) {
+		int indice = Funciones_aux.buscar_historiales(enfermedades, enf);
+		if (indice != -1) {
+			this.enfermedades.remove(indice);
+		} else {
+			System.err.println("ERROR: No esta esa enfermedad en el paciente");
+		}
+	}
+	
+	
+	//TODO pensarlo mejor
+	public void mostrarResumen() {
+		System.out.println(this.paciente+" tiene las siguientes condiciones: ");
+		int contador_enfermedades  = this.enfermedades.size();
+		int contador_medicamentos = this.medicamentos.size();
+		int contador_alergias = this.alergias.size();
+		System.out.println("Enfermedades : "+ contador_enfermedades+ "\n"+
+							"Medicamentos: "+ contador_medicamentos +"\n"+
+							"Alergias: "+ contador_alergias+"\n"+
+							"------------Citas-------------"+
+							"Tienes una cita el "+getFecha_inicial()
+				);
+	}
+	
+	
+}
