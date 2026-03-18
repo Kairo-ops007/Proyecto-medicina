@@ -31,17 +31,7 @@ public class FuncionesAux {
 	 * @param meds
 	 * Se da por hecho que se ha hecho el ordenamiento antes
 	 */
-	public void mostrarMedicoMayor(ArrayList<Medico> meds) {
-		
-		if (meds == null || meds.isEmpty()) {
-			System.err.println("ERROR: La lista de medicos no es valida");
-		} else {
-			System.out.println("El medico mas adulto es " + meds.get(meds.size() - 1));
-		}
-		
-	}
-	
-	
+
 	/**
 	 * Ordena la lista de medicos
 	 * @param array
