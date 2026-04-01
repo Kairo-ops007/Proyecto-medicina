@@ -2,9 +2,8 @@ package medicina;
 
 import java.util.ArrayList;
 
-public class Medico extends Personas implements Mostrable {
+public class Medico extends Persona implements Mostrable {
 	//RESEÑAS
-	//PREGUNTAR SI DEBERIA DE SER ARRAYLIST
 	protected ArrayList<Tipo_medico> especialidades;
 	protected int numeroMedico;
 	protected int añosExp;

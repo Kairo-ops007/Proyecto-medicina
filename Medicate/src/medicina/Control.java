@@ -306,9 +306,9 @@ public class Control {
 
 	}
 
-		//============================================================================================================================================================================
+	//============================================================================================================================================================================
 	public void reprogramarCita(Cita c, LocalDate fechaNueva, LocalTime nuevaHora) {
-		
+
 		if (c == null) {
 			System.err.println("ERROR: La cita no puede ser nula");
 			return;
@@ -320,29 +320,29 @@ public class Control {
 		c.setFecha(fechaNueva);
 		c.setHora(nuevaHora);
 		System.out.println("La cita ha sido reprogramada al dia "+c.getFecha()+ " a la hora "+c.getHora());
-		
-		
+
+
 	}
-	
+
 	//============================================================================================================================================================================
-	
-	
+
+
 	public ArrayList<Cita> citasDia(LocalDate dia){
 		ArrayList<Cita> resultado = new ArrayList<Cita>();
 		for (Paciente p : listaPacientes) {
 			for (Cita c : p.getCitas()) {
 				if (c.getFecha().equals(dia)) {
 					resultado.add(c);
-					
+
 				}
 			}
 		}
 		return resultado; 
 	}
-	
-	
+
+
 	private int contarCitasDeUnMedico (Medico m) {
-		
+
 		int contador = 0;
 		for (Paciente p: listaPacientes) {
 			for (Cita c: p.getCitas()) {
@@ -352,21 +352,21 @@ public class Control {
 			}
 		}
 		return contador;
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Calcula cual es el porcentaje de menores en una lista de pacientes 
 	 * @param ArrayList <Pacientes> pacs
 	 */
 	public void porcentajeMenores(ArrayList<Paciente> pacs) {
-		
+
 		if (pacs.size() == 0) {
 			System.err.println("ADVERTENCIA: La lista de pacientes está vacía");
 			return; 
 		}
-		
+
 		int cont = 0;
 		for (Paciente p : pacs) {
 			if (p != null) {
@@ -380,17 +380,17 @@ public class Control {
 		//TODO revisar el (double)
 		double calculo = (double) cont/pacs.size() *100;
 		System.out.println("El porcentaje de menores entre los pacientes es: "+ calculo);
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Calcula cual es el medico que mas citas tiene asignadas
 	 * @return
 	 */
 	public Medico medicoMasCitas () {
 		int maximo = -1;
-		
+
 		Medico resultado = null;
 		for (Medico m : listaMedicos) {
 			int citas = contarCitasDeUnMedico(m);
@@ -398,7 +398,7 @@ public class Control {
 				maximo = citas;
 				resultado = m;
 			}
-			
+
 		}
 		return resultado;
 
@@ -408,7 +408,7 @@ public class Control {
 	 * @return
 	 */
 	public Medico medicoMenosCitas() {
-		
+
 		int minimo = Integer.MAX_VALUE;
 		Medico med = null;
 		for (Medico m : listaMedicos) {
@@ -416,17 +416,86 @@ public class Control {
 			if (citas < minimo) {
 				minimo = citas;
 				med  = m ;
-				
+
 			}
 		}
 		return med;
-}
+	}
+	/**
+	 * Lista de recetas sin recoger
+	 * @return
+	 */
+	public ArrayList<Receta> recetasSinRecoger(){
+		ArrayList<Receta> recetasS = new ArrayList<Receta>();
+		for (Paciente p : listaPacientes ) {
+			for (Receta r : p.getHistorial().getListaRecetas()) {
+				if (!( r.isRecogida())) {
+					recetasS.add(r);
+				}
+			}
+		}
+		return recetasS;
+	}
 
-	
+
+	public ArrayList<Paciente> pacientesMedico(Medico m){
+		ArrayList<Paciente> pacs = new ArrayList<Paciente>();
+		for (Paciente p: listaPacientes) {
+			for (Cita c : p.getCitas()) {
+				if (c.getMedico().equals(m)) {
+					pacs.add(p);
+				}
+			}
+		}
+		return pacs;
+	}
+
+
+
+	public Medico medicoMasCercano(Paciente p) {
+		return FuncionesAux.medicoMasCercano(listaMedicos, p);
+	}
+
+
 	public void mostrar (Mostrable mos ) {
 		mos.mostrarResumen();
 	}
 
+	
+//	public int puntuacionPacienteFotos () {
+//		int puntuacion = 0;
+//		
+//		//TODO Pensarla
+//		return puntuacion;
+//	}
+//	
+//	public void mostrarFotos(Medico m, Paciente p ) {
+//		int cont = 0;
+//		for (Medico med: medicosEspecialistasEn(Tipo_medico.PSICOLOGO)) {
+//			if (m.equals(med)) {
+//				cont++;
+//			}
+//		}
+//		for (Medico med : medicosEspecialistasEn(Tipo_medico.PSIQUIATRA)) {
+//			if (m.equals(med)) {
+//				cont++;
+//			}
+//		}
+//		if (cont == 0) {
+//			System.err.println("ERROR: Medico inadecuado para el trabajo");
+//			return ;
+//		}
+//		
+//		//TODO logica
+//		
+//		ArrayList<String> fotos = new ArrayList<String>();
+//		
+//		
+//		
+//	}
+//	
+//	
+	
 
 	@Override
 	public boolean equals(Object obj) {

@@ -11,7 +11,7 @@ public class Urgencia extends Cita implements Mostrable {
 			boolean ingresoNecesario) {
 		super(p, m, fecha, hora,motivo, atendida);
 		this.nivelGravedad = nivel;
-		this.ingesoNecesario = importancia();
+		setIngesoNecesario();
 		
 	}
 	

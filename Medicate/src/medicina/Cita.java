@@ -10,7 +10,7 @@ public class Cita implements Mostrable{
 	protected LocalTime hora; // En vez de que me pase  un localtime hacer yo el parseLocalTime
 	protected String motivo;
 	protected boolean atendida;
-//	protected Urgencia urgencia;
+	//	protected Urgencia urgencia;
 
 	/**
 	 *  Constructor de citas
@@ -28,7 +28,7 @@ public class Cita implements Mostrable{
 		this.hora = hora;
 		setMotivo(motivo);
 		this.atendida = atendida;
-//		this.urgencia = urgencia;
+		//		this.urgencia = urgencia;
 	}
 
 
@@ -128,12 +128,12 @@ public class Cita implements Mostrable{
 		System.out.println("con el doctor: "+ getMedico().getNombre()+" con el numero "+getMedico().getNumeroMedico());
 		System.out.println("por el motivo "+getMotivo());
 		System.out.println("el dia "+getFecha());
-		
+
 	}
 
-	
-	
-	
+
+
+
 
 }
 

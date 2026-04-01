@@ -2,7 +2,7 @@ package medicina;
 
 import java.util.ArrayList;
 
-public class Paciente extends Personas implements Mostrable{
+public class Paciente extends Persona implements Mostrable{
 	private double altura;
 	private double peso;
 

@@ -13,7 +13,7 @@ public class Historial {
 	private LocalDate fechaInicial;
 	private LocalDate fechaFinal;
 	private ArrayList<Receta> listaRecetas;
-	
+
 
 
 	public Historial(Paciente paciente, ArrayList<String> enfermedades, ArrayList<String> medicamentos,
@@ -29,7 +29,7 @@ public class Historial {
 		this.fechaFinal = fecha_final;
 		this.listaRecetas = recetas;
 	}
-	
+
 	public Historial ( Paciente paciente) {
 		this.paciente = paciente;
 		this.enfermedades = new ArrayList<>();
@@ -49,8 +49,8 @@ public class Historial {
 			System.err.println("ERROR: La receta no puede ser nula");
 		}
 	}
-	
-	
+
+
 	public Paciente getPaciente() {
 		return paciente;
 	}
@@ -117,11 +117,11 @@ public class Historial {
 
 
 	public void setFechaFinal(LocalDate fecha_final) {
-		
+
 		this.fechaFinal = fecha_final;
 	}
-	
-	
+
+
 	/**
 	 * Quita una cita en caso de que se meta mal
 	 * @param fechaFinal
@@ -194,7 +194,7 @@ public class Historial {
 			System.err.println("ERROR: No esta ese medicamento en el paciente");
 		}
 	}
-	
+
 	/**
 	 * Quita una enfermedad en el historial
 	 * en caso de que te equivoques al meterla
@@ -220,19 +220,19 @@ public class Historial {
 		Historial otro = (Historial) obj;
 		return this.alergias.equals(otro.alergias) && this.enfermedades.equals(otro.enfermedades) && 
 				this.medicamentos.equals(otro.medicamentos);
-		
+
 	}
 
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return this.paciente+" tiene las siguientes condiciones: \n"+
-				"Enfermedades: "+this.enfermedades.size()+"\n"+
+		"Enfermedades: "+this.enfermedades.size()+"\n"+
 		"Medicamentos: "+this.medicamentos.size()+"\n"+
-				"Alergias: "+ this.alergias.size()+"\n";
-		
+		"Alergias: "+ this.alergias.size()+"\n";
+
 	}
 
 
-	
+
 }

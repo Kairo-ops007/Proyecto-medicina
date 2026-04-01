@@ -17,9 +17,9 @@ public class Receta {
 
 		this.medico = medico;
 		this.paciente = paciente;
-		this.medicamento = medicamento;
-		this.dosis = dosis;
-		this.duracionDias = duracionDias;
+		setMedicamento(medicamento);
+		setDosis(dosis);
+		setDuracionDias(duracionDias);
 		this.fechaEntrega = fechaEntrega;
 		this.recogida = recogida;
 	}
@@ -51,7 +51,7 @@ public class Receta {
 
 
 	public void setMedicamento(String medicamento) {
-		this.medicamento = medicamento;
+		FuncionesAux.ayudaSetter(medicamento, "medicamento por validar");
 	}
 
 
@@ -61,7 +61,7 @@ public class Receta {
 
 
 	public void setDosis(String dosis) {
-		this.dosis = dosis;
+		FuncionesAux.ayudaSetter(dosis, "dosis");
 	}
 
 
@@ -71,7 +71,12 @@ public class Receta {
 
 
 	public void setDuracionDias(int duracionDias) {
-		this.duracionDias = duracionDias;
+		if (duracionDias<0) {
+			System.err.println("ERROR: La duracion de dias no puede ser negativa");
+			this.duracionDias=0; 
+		} else {
+			this.duracionDias = duracionDias;
+		}
 	}
 
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class FuncionesAux {
 
 	//Ordenamiento burbuja theta(n**2)
-	
+
 	/**
 	 * Ordena la lista de Pacientes
 	 * @param array
@@ -24,24 +24,27 @@ public class FuncionesAux {
 			}
 		}
 	}
-	
-	
+
+
+
+
+
 	/**
 	 * Muestra el medico mas antiguo
 	 * @param meds
 	 * Se da por hecho que se ha hecho el ordenamiento antes
 	 */
 	public void mostrarMedicoMayor(ArrayList<Medico> meds) {
-		
+
 		if (meds == null || meds.isEmpty()) {
 			System.err.println("ERROR: La lista de medicos no es valida");
 		} else {
 			System.out.println("El medico mas adulto es " + meds.get(meds.size() - 1));
 		}
-		
+
 	}
-	
-	
+
+
 	/**
 	 * Ordena la lista de medicos
 	 * @param array
@@ -67,35 +70,28 @@ public class FuncionesAux {
 	 * @return
 	 */
 	public static boolean comprobacionDNI(String Dni) {
-		
+
 		String dni = Dni.toUpperCase();
-		
 		String posible = dni.substring(0,8);
-		
 		char letra_pos = dni.charAt(8);
-		
 		int op1 = Integer.parseInt(posible);
-		
 		String lista_text = "TRWAGMYFPDXBNJZSQVHLCKE";
-		
 		int resto = op1 % 23;
-		
 		char l_calculada = lista_text.charAt(resto);
-		
 		return l_calculada == letra_pos;
 
 
 	}
 
 	// Para el calculo para saber el medico mas cercano
-	
+
 	/**
 	 * Calcula la distancia entre 2 personas
 	 * @param a
 	 * @param b
 	 * @return
 	 */
-	public static double distancia(Personas a, Personas b) {
+	public static double distancia(Persona a, Persona b) {
 		double dx = a.getX() - b.getX();
 		double dy = a.getY() - b.getY();
 		return Math.sqrt(dx*dx + dy*dy); // NO se puede hacer **2 
@@ -115,8 +111,8 @@ public class FuncionesAux {
 
 		for (int i= 0; i < meds.size(); i++) {
 
-			Personas personaMed = (Personas) meds.get(i);
-			Personas personaPac = (Personas) p;
+			Persona personaMed = (Persona) meds.get(i);
+			Persona personaPac = (Persona) p;
 			double dist = FuncionesAux.distancia(personaMed, personaPac);
 			if (dist< menor) {
 				menor  = dist;
@@ -152,7 +148,7 @@ public class FuncionesAux {
 		}
 	}
 
-	
+
 	/**
 	 * Busca un medico en un ArrayList
 	 * @param array
@@ -173,7 +169,7 @@ public class FuncionesAux {
 		}
 	}
 
-	
+
 	public static int buscarHistoriales (ArrayList<String> array,  String s) {
 		if (s == null || s.length() == 0) {
 			System.err.println("ERROR: No se ha podido buscar "+ s);
@@ -230,8 +226,8 @@ public class FuncionesAux {
 	public static boolean menorDato(int a, int b) {
 		return a<b;
 	}
-	
-	
+
+
 	public static String ayudaSetter(String valor, String nombre) {
 		if (valor == null || valor.isEmpty()) {
 			System.err.println("ERROR: "+ nombre + " no puede estar vacio.");

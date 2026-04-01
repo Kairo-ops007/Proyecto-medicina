@@ -1,6 +1,6 @@
 package medicina;
 
-public abstract class Personas {
+public abstract class Persona {
 	//Atributos 
 	protected String nombre;
 	protected String apellido1;
@@ -21,7 +21,7 @@ public abstract class Personas {
 	public abstract String obtenerRol();
 	
 	
-	public Personas(String nombre, String apellido1, String apellido2, int x, int y,String domicilio,String dni,int edad, String genero) {
+	public Persona(String nombre, String apellido1, String apellido2, int x, int y,String domicilio,String dni,int edad, String genero) {
 		setNombre(nombre);
 		setApellido1(apellido1);
 		setApellido2(apellido2);
@@ -122,8 +122,8 @@ public abstract class Personas {
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
-		if (obj == null || !(obj instanceof Personas)) return false;
-		Personas otraPersona = (Personas) obj;
+		if (obj == null || !(obj instanceof Persona)) return false;
+		Persona otraPersona = (Persona) obj;
 		return ( getDni().equals(otraPersona.getDni()));
 	}
 
