@@ -1,5 +1,4 @@
 package medicina;
-//ventanaConsolaConBotones
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class Control {
 	 * No se le pasan argumentos porque construye los arrays de Pacientes y Medicos
 	 */
 	public Control() {
-
+		
 		this.listaPacientes = new ArrayList<Paciente>();
 		this.listaMedicos = new ArrayList<Medico>();
 	}
@@ -81,7 +80,6 @@ public class Control {
 	}
 
 
-
 	public void setListaPacientes(ArrayList<Paciente> listaPacientes) {
 		this.listaPacientes = listaPacientes;
 	}
@@ -116,7 +114,7 @@ public class Control {
 			return;
 		}
 		if (pacienteYaRegistrado(p)) {
-			System.err.println("Ese paciente ya esta registrado");
+			System.err.println("El paciente "+p.getNombre()+" ya esta registrado");
 			return;
 		}
 		this.listaPacientes.add(p);
@@ -181,7 +179,9 @@ public class Control {
 	}
 
 
-
+	
+	
+	
 	/**
 	 * Muestra los pacientes NO argumentos
 	 */
@@ -220,11 +220,11 @@ public class Control {
 	 * @param tm -> el tipo de especialidad
 	 * @return
 	 */
-	public ArrayList<Medico> medicosEspecialistasEn(Tipo_medico tm){
+	public ArrayList<Medico> medicosEspecialistasEn(TipoMedico tm){
 		ArrayList<Medico> listaMedicos = new ArrayList<Medico>();
 
 		for (Medico m : getListaMedicos()) {
-			for (Tipo_medico tipo : m.getEspecialidades()) {
+			for (TipoMedico tipo : m.getEspecialidades()) {
 				if (tm != null && tipo!= null &&tm.equals(tipo)) {
 					listaMedicos.add(m);
 				}
@@ -462,40 +462,7 @@ public class Control {
 	}
 
 	
-//	public int puntuacionPacienteFotos () {
-//		int puntuacion = 0;
-//		
-//		//TODO Pensarla
-//		return puntuacion;
-//	}
-//	
-//	public void mostrarFotos(Medico m, Paciente p ) {
-//		int cont = 0;
-//		for (Medico med: medicosEspecialistasEn(Tipo_medico.PSICOLOGO)) {
-//			if (m.equals(med)) {
-//				cont++;
-//			}
-//		}
-//		for (Medico med : medicosEspecialistasEn(Tipo_medico.PSIQUIATRA)) {
-//			if (m.equals(med)) {
-//				cont++;
-//			}
-//		}
-//		if (cont == 0) {
-//			System.err.println("ERROR: Medico inadecuado para el trabajo");
-//			return ;
-//		}
-//		
-//		//TODO logica
-//		
-//		ArrayList<String> fotos = new ArrayList<String>();
-//		
-//		
-//		
-//	}
-//	
-//	
-	
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -513,8 +480,5 @@ public class Control {
 		return "Clinica con "+ listaPacientes.size()+ " pacientes"+
 				" y " +listaMedicos.size()+" medicos";
 	}
-
-
-
 
 }

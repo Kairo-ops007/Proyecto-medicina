@@ -1,5 +1,0 @@
-package medicina;
-
-public enum NivelImportancia {
-
-}

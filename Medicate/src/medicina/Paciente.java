@@ -5,33 +5,41 @@ import java.util.ArrayList;
 public class Paciente extends Persona implements Mostrable{
 	private double altura;
 	private double peso;
-
+	private String genero;
 	private ArrayList<Cita> citas;
+	private ArrayList<String> vacunas; 
 	private Historial historial;
-
+	
+	
 	public Paciente(String nombre, String apellido1, String apellido2, int x , int y,String domicilio,String dni,int edad,String genero,  
-			double altura, double peso) {
+			double altura, double peso, ArrayList<String> vacunas) {
 		super(nombre, apellido1, apellido2, x, y, domicilio, dni, edad, genero);
 		setAltura(altura);
 		setPeso(peso);
+		this.vacunas = vacunas;
 		this.historial = new Historial (this);
 		this.citas = new ArrayList<Cita>(); // NO haría falta el <cita> por el diamond condition
+		this.genero = genero;
 	}
-	//TODO pensarlo mejor
-//	public Paciente () {
-//		this.nombre = "Desconocido";
-//		this.apellido1 = "Desconocido";
-//		this.apellido2 ="Desconocido";
-//		this.x = 0;
-//		this.y = 0;
-//		this.domicilio = "Desconocido";
-//		this.dni = "Desconocido";
-//		this.edad = 0;
-//		this.genero = "Desconocido";
-//		this.altura = 0;
-//		this.peso = 0;
-//	}
-//	
+	
+
+	public String getGenero() {
+		return genero;
+	}
+
+
+	public void setGenero(String genero) {
+		this.genero = FuncionesAux.ayudaSetter(genero, "genero");
+	}
+
+
+	public ArrayList<String> getVacunas() {
+		return vacunas;
+	}
+
+	public void setVacunas(ArrayList<String> vacunas) {
+		this.vacunas = vacunas;
+	}
 
 	public ArrayList<Cita> getCitas() {
 		return citas;

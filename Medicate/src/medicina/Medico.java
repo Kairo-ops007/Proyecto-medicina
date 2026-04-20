@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class Medico extends Persona implements Mostrable {
 	//RESEÑAS
-	protected ArrayList<Tipo_medico> especialidades;
+	protected ArrayList<TipoMedico> especialidades;
 	protected int numeroMedico;
 	protected int añosExp;
 	
 	private static int cont=1;
 	public Medico(String nombre, String apellido1, String apellido2, int x, int y, String domicilio, String dni,
-			int edad, String genero, ArrayList<Tipo_medico> especialidades, int añosExp) {
+			int edad, String genero, ArrayList<TipoMedico> especialidades, int añosExp) {
 	
 		super(nombre, apellido1, apellido2, x, y, domicilio, dni, edad, genero);
 		
@@ -35,12 +35,12 @@ public class Medico extends Persona implements Mostrable {
 	}
 
 
-	public ArrayList<Tipo_medico> getEspecialidades() {
+	public ArrayList<TipoMedico> getEspecialidades() {
 		return especialidades;
 	}
 
 	
-	public void setEspecialidades(ArrayList<Tipo_medico> especialidad) {
+	public void setEspecialidades(ArrayList<TipoMedico> especialidad) {
 		this.especialidades= especialidad;
 	}
 
@@ -67,7 +67,7 @@ public class Medico extends Persona implements Mostrable {
 	 * Visualiza las especialidades del medico
 	 */
 	public void visualizarEspecialidades() {
-		for(Tipo_medico s : this.especialidades) {
+		for(TipoMedico s : this.especialidades) {
 			System.out.println(s);
 		}
 	}

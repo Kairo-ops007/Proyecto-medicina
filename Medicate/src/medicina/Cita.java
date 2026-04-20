@@ -1,5 +1,4 @@
 package medicina;
-//TODO Joptionpane
 import java.time.LocalDate;
 import java.time.LocalTime;
 

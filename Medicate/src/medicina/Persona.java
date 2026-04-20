@@ -100,7 +100,7 @@ public abstract class Persona {
 			this.dni = dni;
 		}
 		else {
-			System.err.println("Fallo con el DNI del usuario");
+			System.err.println("Fallo con el DNI del usuario "+getNombre());
 			this.dni = "Desconocido";
 		}
 	}

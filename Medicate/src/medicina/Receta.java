@@ -22,6 +22,7 @@ public class Receta {
 		setDuracionDias(duracionDias);
 		this.fechaEntrega = fechaEntrega;
 		this.recogida = recogida;
+		
 	}
 
 
