@@ -360,11 +360,11 @@ public class Control {
 	 * Calcula cual es el porcentaje de menores en una lista de pacientes 
 	 * @param ArrayList <Pacientes> pacs
 	 */
-	public void porcentajeMenores(ArrayList<Paciente> pacs) {
+	public double porcentajeMenores(ArrayList<Paciente> pacs) {
 
 		if (pacs.size() == 0) {
 			System.err.println("ADVERTENCIA: La lista de pacientes está vacía");
-			return; 
+			return 0; 
 		}
 
 		int cont = 0;
@@ -380,7 +380,7 @@ public class Control {
 		//TODO revisar el (double)
 		double calculo = (double) cont/pacs.size() *100;
 		System.out.println("El porcentaje de menores entre los pacientes es: "+ calculo);
-
+		return calculo;
 	}
 
 
@@ -437,6 +437,29 @@ public class Control {
 		return recetasS;
 	}
 
+	public double porcentajeObesos(ArrayList<Paciente> pacs) {
+		int contador = 0;
+		for (Paciente p : pacs) {
+			if (p.imc()> 30) {
+				contador ++;
+			}
+		}
+		
+		double calculo = (double) contador / pacs.size() *100 ;
+		return calculo;
+	}
+	public double porcentajeBajoPeso(ArrayList<Paciente> pacs) {
+		int contador = 0;
+		for (Paciente p : pacs) {
+			if (p.imc()<18.5) {
+				contador ++;
+			}
+		}
+		
+		double calculo = (double) contador / pacs.size() *100 ;
+		return calculo;
+	}
+	
 
 	public ArrayList<Paciente> pacientesMedico(Medico m){
 		ArrayList<Paciente> pacs = new ArrayList<Paciente>();

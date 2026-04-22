@@ -41,6 +41,7 @@ public class VentanaMain extends JFrame{
         tablaPacientes.getTableHeader().setBackground(new Color(170, 130, 10));
         tablaPacientes.getTableHeader().setForeground(Color.cyan);
         
+        
         JButton botonMed = new JButton("Ver Medicos");
         botonMed.setBackground(new Color(130,75,90));
         botonMed.setForeground(Color.GREEN);
@@ -153,7 +154,7 @@ public class VentanaMain extends JFrame{
 					String genero = (i % 2 == 0) ? "Femenino" : "Masculino";
 					int edad = 5 + (i * 3); // Edades variadas desde 5 hasta 90+
 					double altura = 1.40 + (i * 0.01); // Alturas entre 1.40 y 1.70 aprox
-					double peso = 40.0 + (i * 1.5); // Pesos entre 40kg y 85kg aprox
+					double peso = 43.0 + (i * 1.5); // Pesos entre 40kg y 85kg aprox
 					
 					Paciente p = new Paciente(nomPacientes[i], apellidosPacientes[i], apellidosPacientes[29-i], -5*i, 10*i, "Avenida " + nomPacientes[i] + " " + i, dniValido, edad, genero, altura, peso, new ArrayList<>());
 					control.registrarPaciente(p);
@@ -172,6 +173,7 @@ public class VentanaMain extends JFrame{
 	
 	}
 	public static void main(String[] args) {
+		
 	    new VentanaMain();
 
 	}

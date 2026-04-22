@@ -52,7 +52,7 @@ public class Receta {
 
 
 	public void setMedicamento(String medicamento) {
-		FuncionesAux.ayudaSetter(medicamento, "medicamento por validar");
+		this.medicamento = FuncionesAux.ayudaSetter(medicamento, "medicamento por validar");
 	}
 
 
@@ -62,7 +62,7 @@ public class Receta {
 
 
 	public void setDosis(String dosis) {
-		FuncionesAux.ayudaSetter(dosis, "dosis");
+		this.dosis = FuncionesAux.ayudaSetter(dosis, "dosis");
 	}
 
 
