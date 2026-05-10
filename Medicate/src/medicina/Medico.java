@@ -1,22 +1,25 @@
 package medicina;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Medico extends Persona implements Mostrable {
 	//RESEÑAS
 	protected ArrayList<TipoMedico> especialidades;
 	protected int numeroMedico;
 	protected int añosExp;
-	
+	protected HashMap <LocalDate,Cita> citasMedico;
 	private static int cont=1;
 	public Medico(String nombre, String apellido1, String apellido2, int x, int y, String domicilio, String dni,
-			int edad, String genero, ArrayList<TipoMedico> especialidades, int añosExp) {
+			int edad, String genero, ArrayList<TipoMedico> especialidades, int añosExp, HashMap<LocalDate, Cita> citasMedico) {
 	
 		super(nombre, apellido1, apellido2, x, y, domicilio, dni, edad, genero);
 		
 		setEspecialidades(especialidades);
 		setNumeroMedico(cont++);
 		setAñosExp(añosExp);
+		this.citasMedico = citasMedico;
 		
 	}
 
@@ -86,6 +89,14 @@ public class Medico extends Persona implements Mostrable {
 		Medico otroMedico = (Medico) obj;
 		return this.getDni().equals(otroMedico.getDni());
 		
+	}
+
+	public HashMap<LocalDate, Cita> getCitasMedico() {
+		return citasMedico;
+	}
+
+	public void setCitasMedico(HashMap<LocalDate, Cita> citasMedico) {
+		this.citasMedico = citasMedico;
 	}
 
 	@Override

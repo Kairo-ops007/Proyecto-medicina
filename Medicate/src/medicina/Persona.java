@@ -1,4 +1,4 @@
-package medicina;
+	package medicina;
 
 public abstract class Persona {
 	//Atributos 
@@ -32,6 +32,19 @@ public abstract class Persona {
 		setEdad(edad);
 		setGenero(genero);
 	}
+
+	public Persona() {
+		setNombre("");
+		setApellido1("");
+		setApellido2("");
+		setX(0);
+		setY(0);
+		setDomicilio("");
+		setDni("12345678Z");
+		setEdad(0);
+		setGenero("");
+	}
+
 
 	public String getGenero() {
 		return genero;

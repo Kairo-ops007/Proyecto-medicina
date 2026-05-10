@@ -18,7 +18,7 @@ public class Paciente extends Persona implements Mostrable{
 		setPeso(peso);
 		this.vacunas = vacunas;
 		this.historial = new Historial (this);
-		this.citas = new ArrayList<Cita>(); // NO haría falta el <cita> por el diamond condition
+		this.citas = new ArrayList<Cita>(); 
 		this.genero = genero;
 	}
 	

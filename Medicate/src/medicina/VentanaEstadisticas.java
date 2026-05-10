@@ -6,6 +6,7 @@ import java.awt.*;
 import javax.swing.*;
 
 public class VentanaEstadisticas extends JFrame{
+	private static final long serialVersionUID = 1L;
 	private Control control;
 
 	public VentanaEstadisticas(Control control) throws HeadlessException {
@@ -39,7 +40,7 @@ public class VentanaEstadisticas extends JFrame{
 //		titulo.setIcon(new Icon); TODO pensarla
 		panel.add(labelImc, BorderLayout.NORTH);
 		
-		String [] nombreColumnas = { "Nombre", "Diagnostico" };
+		String [] nombreColumnas = { "Nombre", "Diagnostico (calc)" };
         Object[] [] datos = new Object[control.getListaPacientes().size()][2];
         for (int i = 0; i < control.getListaPacientes().size();i++) {
         	Paciente p = control.getListaPacientes().get(i);
@@ -148,6 +149,7 @@ public class VentanaEstadisticas extends JFrame{
 		panelObesos.add(texto3);
 		panelObesos.add(progressObesos);
 		
+		
 		JLabel texto4 = new JLabel("Bajo Peso");
 		int calculo = (int) control.porcentajeBajoPeso(control.getListaPacientes());
 		JProgressBar progressBajoPeso = new JProgressBar(0,100);
@@ -160,14 +162,16 @@ public class VentanaEstadisticas extends JFrame{
 		panelBajoPeso.add(texto4);
 		panelBajoPeso.add(progressBajoPeso);
 		
-	    JPanel panelSur = new JPanel(new GridLayout(2, 1));
+		
+	    JPanel panelSur = new JPanel(new GridLayout(4, 1));
 	    panelSur.add(panelMenores);
 	    panelSur.add(panelMayores);
 	    panelSur.add(panelObesos);
 	    panelSur.add(panelBajoPeso);
 	    panel.add(panelSur,BorderLayout.SOUTH);
-		
+
 		return panel;
+	
 	}
 	
 }

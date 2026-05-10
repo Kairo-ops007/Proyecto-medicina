@@ -5,6 +5,8 @@ import java.awt.*;
 
 import java.util.ArrayList;
 public class VentanaPacientes extends JFrame{
+	private static final long serialVersionUID = 1L;
+
 	public VentanaPacientes(Control control) {
 		this.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		this.setTitle("MEDICATE - Pacientes");

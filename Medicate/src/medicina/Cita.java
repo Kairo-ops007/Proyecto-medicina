@@ -5,12 +5,11 @@ import java.time.LocalTime;
 public class Cita implements Mostrable{
 	protected Paciente paciente;
 	protected Medico medico;
-	protected LocalDate fecha; // En vez de que me pase un LocalDate hacer yo el parseLocalDate
-	protected LocalTime hora; // En vez de que me pase  un localtime hacer yo el parseLocalTime
+	protected LocalDate fecha; 
+	protected LocalTime hora; 
 	protected String motivo;
 	protected boolean atendida;
-	//	protected Urgencia urgencia;
-
+	
 	/**
 	 *  Constructor de citas
 	 * @param Paciente paciente
